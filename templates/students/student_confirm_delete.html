@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Student | Student Records</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+        padding: 24px;
+        color: #1e293b;
+        background: #fff7f7;
+        font-family: Arial, sans-serif;
+      }
+      .card {
+        width: min(100%, 510px);
+        padding: 38px;
+        border: 1px solid #fecaca;
+        border-radius: 18px;
+        background: white;
+        box-shadow: 0 16px 40px rgba(127, 29, 29, 0.1);
+        text-align: center;
+      }
+      .icon {
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        margin: 0 auto 19px;
+        border-radius: 50%;
+        color: #dc2626;
+        background: #fee2e2;
+        font-size: 1.7rem;
+        font-weight: bold;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        letter-spacing: -0.04em;
+      }
+      p {
+        margin: 13px 0 27px;
+        color: #64748b;
+        line-height: 1.55;
+      }
+      strong {
+        color: #334155;
+      }
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+      }
+      button,
+      .cancel {
+        padding: 11px 17px;
+        border-radius: 8px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      button {
+        border: 0;
+        color: white;
+        background: #dc2626;
+      }
+      button:hover {
+        background: #b91c1c;
+      }
+      .cancel {
+        border: 1px solid #dbe3ef;
+        color: #475569;
+        background: white;
+      }
+      .cancel:hover {
+        background: #f8fafc;
+      }
+      @media (max-width: 420px) {
+        .card {
+          padding: 30px 20px;
+        }
+        .actions {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="icon">!</div>
+      <h1>Delete student?</h1>
+      <p>
+        You are about to permanently remove
+        <strong>{{ student.first_name }} {{ student.last_name }}</strong> from
+        the student register.
+      </p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+          <button type="submit">Yes, delete student</button
+          ><a class="cancel" href="{% url 'student_list' %}">Keep student</a>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }} | Student Records</title>
+    <style>
+      :root {
+        --primary: #4f46e5;
+        --dark: #3730a3;
+        --ink: #1e293b;
+        --muted: #64748b;
+        --line: #dbe3ef;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+        background: linear-gradient(135deg, #eef2ff, #f8fafc 45%, #ecfeff);
+      }
+      .page {
+        width: min(100% - 32px, 680px);
+        margin: 56px auto;
+      }
+      .brand {
+        display: inline-flex;
+        gap: 9px;
+        align-items: center;
+        margin-bottom: 20px;
+        color: var(--primary);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 29px;
+        height: 29px;
+        border-radius: 8px;
+        color: white;
+        background: var(--primary);
+      }
+      .card {
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: white;
+        box-shadow: 0 16px 42px rgba(30, 41, 59, 0.1);
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(1.7rem, 4vw, 2.15rem);
+        letter-spacing: -0.04em;
+      }
+      .intro {
+        margin: 9px 0 27px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .form-errors {
+        margin: 0 0 18px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        color: #991b1b;
+        background: #fef2f2;
+      }
+      .field {
+        margin-bottom: 19px;
+      }
+      label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        outline: none;
+        color: var(--ink);
+        font: inherit;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px #e0e7ff;
+      }
+      .error {
+        display: block;
+        margin-top: 6px;
+        color: #b91c1c;
+        font-size: 0.84rem;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 28px;
+      }
+      .button {
+        padding: 11px 17px;
+        border: 0;
+        border-radius: 8px;
+        color: white;
+        background: var(--primary);
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+      }
+      .button:hover {
+        background: var(--dark);
+      }
+      .cancel {
+        color: var(--muted);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      @media (max-width: 520px) {
+        .page {
+          margin: 28px auto;
+        }
+        .card {
+          padding: 25px 20px;
+        }
+        .actions {
+          align-items: stretch;
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <a class="brand" href="{% url 'student_list' %}"
+        ><span class="brand-mark">S</span>Student Records</a
+      >
+      <section class="card">
+        <h1>{{ page_title }}</h1>
+        <p class="intro">
+          {% if student %}Update this student's information below.{% else
+          %}Enter the student's details to add them to the register.{% endif %}
+        </p>
+        <form method="post">
+          {% csrf_token %}{% if form.non_field_errors %}
+          <div class="form-errors">{{ form.non_field_errors }}</div>
+          {% endif %}{% for field in form %}
+          <div class="field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}
+            <small class="error">{{ error }}</small>
+            {% endfor %}
+          </div>
+          {% endfor %}
+          <div class="actions">
+            <button class="button" type="submit">
+              {% if student %}Save changes{% else %}Add student{% endif %}</button
+            ><a class="cancel" href="{% url 'student_list' %}">Cancel</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

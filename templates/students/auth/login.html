@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Login</title>
+    <style>
+      :root { --primary: #4f46e5; --ink: #1e293b; --muted: #64748b; --line: #e2e8f0; }
+      * { box-sizing: border-box; }
+      body { display: grid; min-height: 100vh; margin: 0; place-items: center; padding: 24px; color: var(--ink); background: #f8fafc; font-family: Arial, sans-serif; }
+      .card { width: min(100%, 410px); padding: 36px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(30, 41, 59, .08); }
+      .eyebrow { margin: 0 0 8px; color: var(--primary); font-size: .76rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+      h1 { margin: 0 0 8px; font-size: 1.9rem; letter-spacing: -.04em; }
+      .subtitle { margin: 0 0 26px; color: var(--muted); }
+      label { display: block; margin: 0 0 7px; font-size: .9rem; font-weight: 700; }
+      input { width: 100%; margin: 0 0 18px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font: inherit; }
+      input:focus { outline: 2px solid #c7d2fe; border-color: var(--primary); }
+      button { width: 100%; border: 0; border-radius: 8px; padding: 12px; color: white; background: var(--primary); cursor: pointer; font: inherit; font-weight: 700; }
+      button:hover { background: #3730a3; }
+      .notice { margin: 0 0 18px; padding: 11px 12px; border: 1px solid #fecaca; border-radius: 8px; color: #b91c1c; background: #fef2f2; }
+      .switch { margin: 20px 0 0; text-align: center; color: var(--muted); font-size: .92rem; }
+      .switch a { color: var(--primary); font-weight: 700; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <p class="eyebrow">Student Records</p>
+      <h1>Welcome back</h1>
+      <p class="subtitle">Sign in to access the student register.</p>
+      {% if messages %}{% for message in messages %}<div class="notice">{{ message }}</div>{% endfor %}{% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required autofocus />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button type="submit">Log in</button>
+      </form>
+      <p class="switch">New here? <a href="{% url 'student_signup' %}">Create an account</a></p>
+    </main>
+  </body>
+</html>

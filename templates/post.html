@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="page-shell"><h1>Post Card Template ({{posts.count}})</h1>
+        <a href="{% url 'home' %}">Back to Home</a>
+        <div class="page-actions">
+            <a class="btn btn-primary" href="{% url 'home' %}">Back to Home</a>
+            <a class="btn btn-secondary" href="{% url 'about' %}">About</a>
+        </div>
+</body>
+</html>

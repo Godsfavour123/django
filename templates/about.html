@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Paget</title>
+  </head>
+  <body>
+    <h1>About page</h1>
+    <p>{{taofeek}}</p>
+    <h2>The Developer's name is Awele</h2>
+    <h2>The G.O.A.T is {{GOAT}}</h2>
+    <h1>{{best_players}}</h1>
+    {% for player in best_players %}
+    <p style="padding: 10px 100px">
+      {{players}}{% if player == "Ororo" %}<span>GOAT</span>{% endif %}
+    </p>
+    {% endfor %}
+    <a href="/">Back to Home</a>
+    <a href="{% url 'home' %}">Home</a>
+  </body>
+</html>

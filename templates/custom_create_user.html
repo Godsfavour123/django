@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create account</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #f8fafc);
+            color: #1e293b;
+        }
+
+        .form-card {
+            width: min(100%, 430px);
+            padding: 32px;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 16px 40px rgba(30, 41, 59, 0.14);
+        }
+
+        h2 {
+            margin: 0 0 24px;
+            text-align: center;
+            font-size: 1.75rem;
+        }
+
+        .message {
+            margin: 0 0 16px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #fee2e2;
+            color: #b91c1c;
+            font-size: 0.9rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        label > span:first-child { display: block; margin-bottom: 7px; }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font: inherit;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: 0;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: #ffffff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover { background: #4338ca; }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        {% for message in messages %}
+        <p class="message">{{message}}</p>
+        {% endfor %}
+        <h2>Create account</h2>
+        <form action="{% url 'custom_create_user' %}" method="post">
+            {% csrf_token %}
+            <label for="username">
+                <span>username</span>
+                <span>
+                    <input
+                    name="username" 
+                    type="text"
+                    id="username"
+                    placeholder="Enter username">
+                </span>
+            </label>
+            <label for="email">
+                <span>Email</span>
+                <span>
+                    <input
+                    name="email" 
+                    type="email"
+                    id="email"
+                    placeholder="Enter email">
+                </span>
+            </label>
+            <label for="password">
+                <span>Password</span>
+                <input 
+                name="password"
+                type="password"
+                id="password"
+                placeholder="password">
+            </label>
+             <label for="confirm_password">
+                <span>Confirm password</span>
+                <input 
+                name="confirm_password"
+                type="password"
+                id="confirm_password"
+                placeholder="confirm password">
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

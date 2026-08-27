@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .errorlist {
+            color: red;
+            list-style-type: none;
+            padding: 0;
+        }
+        .messages{
+            color: brown;
+            font-weight: bold;
+            background-color: seagreen;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        {% for message in messages %}
+        <p class="messages">{{message}}</p>
+        {% endfor %}
+        <h2>{{form_name}}</h2>
+        <form action="" methods="POST">
+         {% csrf_token %} <br/>
+         {{form}}
+        
+        <button type="submit">Create Account</button>
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Card Template</title>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f1ff 0%, #e6f2ff 100%);
+    min-height: 100vh;
+}
+
+.post-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.post-card {
+    width: 100%;
+    max-width: 760px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.post-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    background: linear-gradient(90deg, #6d28d9, #2563eb);
+    color: #ffffff;
+}
+
+.post-card__eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.post-card__badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.post-card__body {
+    display: flex;
+    gap: 24px;
+    padding: 28px;
+}
+
+.post-card__content {
+    flex: 2;
+}
+
+.post-card__date {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+}
+
+.post-card__message {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 20px;
+}
+
+.post-card__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: #4b5563;
+    font-size: 0.95rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 16px;
+}
+
+.post-card__side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+.post-card__stamp {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #111827;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.post-card__note {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 700px) {
+    .post-card__body {
+        flex-direction: column;
+    }
+
+    .post-card__footer {
+        flex-direction: column;
+    }
+}
+    </style>
+</head>
+<body class="post-page">
+    <div class="page-shell"><h1>Post Card Template ({{posts.count}})</h1>
+        <div class="page-actions">
+            <a class="btn btn-primary" href="{% url 'home' %}">Back to Home</a>
+            <a class="btn btn-secondary" href="{% url 'about' %}">About</a>
+        </div>
+
+        {% for post in posts %}
+        <div class="postcard-list">
+            
+            <article class="postcard">
+                <div class="postcard__message">
+                    <p class="postcard__date">{{ post.date|date:"M d, Y" }}</p>
+                    <h2>{{ post.name }}</h2>
+                    <p>{{ post.body | truncatewords:50 }}</p>
+                </div>
+
+                <div class="postcard__side">
+                    <div class="postcard__stamp">POST</div>
+                    <div class="postcard__address">
+                        <p>To: Guest</p>
+                        <p>From: {{ post.name }}</p>
+                        <p>Status: {% if post.is_published %}Published{% else %}Draft{% endif %}</p>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">No posts available yet.</div>
+            <a class="btn btn-primary" href="{% url 'home' %}">Back to Home</a>
+
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
