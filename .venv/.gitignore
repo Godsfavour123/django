@@ -20,6 +20,8 @@ media
 # C extensions
 *.so
 
+staticfiles/
+
 # Distribution / packaging
 .Python
 build/
